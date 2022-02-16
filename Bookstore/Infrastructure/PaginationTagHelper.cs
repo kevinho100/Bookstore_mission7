@@ -14,8 +14,8 @@ namespace Bookstore.Infrastructure
     {
         //Dynamically create the page links for us
         private IUrlHelperFactory _uhf;
-        private object tag;
-
+        //private object tag;
+        
         public PaginationTagHelper(IUrlHelperFactory temp)
         {
             _uhf = temp;
@@ -47,12 +47,12 @@ namespace Bookstore.Infrastructure
                 TagBuilder tb = new TagBuilder("a");
 
                 tb.Attributes["href"] = uh.Action(PageAction, new { pageNum = i });
-                //if (PageClassesEnabled)
-                //{
-                //    tag.AddCssClass(PageClass);
-                //    tag.AddCssClass(i == PageModel.CurrentPage
-                //        ? PageClassSelected : PageClassNormal);
-                //}
+                if (PageClassesEnabled)
+                {
+                    tb.AddCssClass(PageClass);
+                    tb.AddCssClass(i == PageModel.CurrentPage
+                        ? PageClassSelected : PageClassNormal);
+                }
                 tb.InnerHtml.Append(i.ToString());
 
                 final.InnerHtml.AppendHtml(tb);
