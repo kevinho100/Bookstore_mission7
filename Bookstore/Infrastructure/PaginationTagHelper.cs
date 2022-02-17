@@ -14,7 +14,6 @@ namespace Bookstore.Infrastructure
     {
         //Dynamically create the page links for us
         private IUrlHelperFactory _uhf;
-        //private object tag;
         
         public PaginationTagHelper(IUrlHelperFactory temp)
         {
