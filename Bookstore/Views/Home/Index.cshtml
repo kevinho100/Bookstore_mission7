@@ -7,29 +7,11 @@
 
 @foreach (Books x in Model.Books)
 {
-    <div class="card card-outline-primary m-1 p-1">
-        <div class="bg-faded p-1">
-            <h4>
-                @x.Title
-                <span class="badge badge-pill badge-primary" style="float:right">
-                    <small>$@x.Price</small>
-                </span>
-            </h4>
-            <ul>
-                <li>Author: @x.Author</li>
-                <li>Publsiher: @x.Publisher</li>
-                <li>Isbn: @x.Isbn</li>
-                <li>Classification: @x.Classification</li>
-                <li>Category: @x.Category</li>
-                <li>Page Count: @x.PageCount</li>
-                
-            </ul>
-        </div>
-
-    </div>
+    <partial name="ProjectSummary" model="x" />
 
 }
 
 <div page-model="@Model.PageInfo" page-action="Index" page-classes-enabled="true"
      page-class="btn" page-class-normal="btn-outline-dark"
      page-class-selected="btn-primary" class="btn-group pull-right m-1"></div>
+

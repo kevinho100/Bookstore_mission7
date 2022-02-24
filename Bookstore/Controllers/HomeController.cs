@@ -20,7 +20,7 @@ namespace Bookstore.Controllers
             repo = temp;
         }
 
-        public IActionResult Index(int pageNum = 1)
+        public IActionResult Index(string Category, int pageNum = 1)
         {
             int pageSize = 10;
 
@@ -29,13 +29,16 @@ namespace Bookstore.Controllers
                 //pagination set up
 
                 Books = repo.Books
+                .Where(p => p.Category == Category || Category == null)
                 .OrderBy(p => p.Title)
                 .Skip((pageNum - 1) * pageSize)
                 .Take(pageSize),
 
                 PageInfo = new PageInfo
                 {
-                    TotalNumBooks = repo.Books.Count(),
+                    TotalNumBooks = (Category == null
+                        ?  repo.Books.Count()
+                        : repo.Books.Where(x => x.Category == Category).Count()),
                     BooksPerPage = pageSize,
                     CurrentPage = pageNum
                 }
